@@ -1,5 +1,9 @@
 public class SPL {
-    
+    // Matriks Eselon Baris
+    public static Matrix eselonBaris(Matrix m){
+        return m;
+    }
+
     // Matriks Eselon
     public static Matrix getEselon(Matrix m){
         return m;

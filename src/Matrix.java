@@ -37,6 +37,9 @@ public class Matrix {
         }
     }
 
+    public void setELMT(int i, int j, double k){
+        this.m[i][j] = k;
+    }
     public void displayMatrix(){
         int i, j;
         for(i=0; i<this.row; i++){
@@ -66,8 +69,24 @@ public class Matrix {
             }
         }
     }
-
     
+    public Matrix kaliMatrix(Matrix m1, Matrix m2){
+        Matrix m3 = new Matrix(m1.getRow(), m2.getColumn());
+        int i, j, k = 0;
+        double tmp = 0;
+
+        for (i = 0; i < m1.getRow(); i++) {
+            for (j = 0; j < m2.getColumn(); j++) {
+                tmp = 0;
+                for (k = 0; k < m1.getColumn(); k++) {
+                    tmp += m1.getELMT(i, k) * m2.getELMT(k, j);
+                }
+                m3.setELMT(i, j, tmp);
+            }
+        }
+        return m3;
+    }
+
     // Operasi Baris Elementer // 
     public void divRow(int i, double k){ // membagi row dengan konstanta k
         int j;
@@ -93,6 +112,78 @@ public class Matrix {
             this.m[i1][j] -= k * this.m[i2][j];
         }
     }
+
+    public static boolean isUnder0(Matrix m, int i, int j){ // cek elemen dibawah == 0
+        int ctr;
+        ctr =0;
+        while(i+1 < m.row && ctr == 0){
+            if (m.getELMT(i,j) != 0){
+                ctr += 1;
+            }
+            i++;
+        }
+        return (ctr == 0);
+    }
+
+    public static boolean isRowEmpty(Matrix m, int i){ // cek baris kosong
+        int j,ctr;
+        ctr = 0;
+        for(j=0; j<m.column; j++){
+            if (m.getELMT(i, j) == 0){
+                ctr += 1;
+            }
+        }
+        return (j == (ctr-1));
+    }
+
+    public static Matrix swapEmptyRow(Matrix m){ // menukar baris kosong agar menjadi dibawah matriks
+        int i = 0;
+        int j;
+        boolean found = false;
+
+        while(!found){
+            if(isRowEmpty(m, i)){
+                found = true;
+            }
+            i++;
+        }
+
+        for (j = i + 1;j<m.row;j++){
+            if(!isRowEmpty(m, j)){
+                m.swapRow(i, j);
+            }
+        }
+
+        return m;
+
+    }
+
+    public static int idxLeadOne(Matrix m, int i){ // mencari satu utama pada suatu baris
+        int j,ctr;
+        ctr = 0;
+        for(j=0;j<m.column;j++){
+            if(m.getELMT(i, j) == 1){
+                ctr = j;
+            }
+        }
+        return ctr;
+    }
+
+
+    public static boolean isDiagEQOne(Matrix m){ //cek diagonal apakah bernilai 1
+        int i;
+        boolean isOne;
+        i = 0;
+        isOne = true;
+        while (i<m.getRow() && isOne){
+            if (m.getELMT(i, i) != 1){
+                isOne = false;
+            }
+            i++;
+        }
+        return isOne;
+    }
+
 
     // Pembuatan Matrix Augmented //
 

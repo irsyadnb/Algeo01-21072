@@ -55,6 +55,17 @@ public class Matrix {
         return(this.row * this.column);
     }
 
+    public void transMatrix(){ //tranpose matrix
+        int i, j;
+        double tmp;
+        for (i = 0; i<this.row; i++){
+            for (j=0; j<this.column; j++){
+                tmp = this.m[i][j];
+                this.m[i][j] = this.m[j][i];
+                this.m[j][i] = tmp;
+            }
+        }
+    }
     // Operasi Baris Elementer // 
     public void divRow(int i, double k){ // membagi row dengan konstanta k
         int j;

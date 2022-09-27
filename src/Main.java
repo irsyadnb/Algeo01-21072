@@ -39,8 +39,6 @@ public class Main {
                 System.out.println("***************Determinan**************");
                 System.out.println("1. Metode Ekspansi Kofaktor");
                 System.out.println("2. Metode Reduksi Baris");
-                System.out.println("3. Metode matriks balikan");
-                System.out.println("4. Kaidah Cramer");
                 System.out.println();
                 
                 System.out.print("Input menu : ");

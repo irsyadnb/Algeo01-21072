@@ -66,6 +66,8 @@ public class Matrix {
             }
         }
     }
+
+    
     // Operasi Baris Elementer // 
     public void divRow(int i, double k){ // membagi row dengan konstanta k
         int j;
@@ -92,4 +94,40 @@ public class Matrix {
         }
     }
 
+    // Pembuatan Matrix Augmented //
+
+    public static Matrix coeffMat(Matrix m){ // membuat Coefficient Matrix
+        Matrix koefMat = new Matrix(m.row, m.column - 1);
+        int i,j;
+        for(i=0;i<koefMat.row;i++){
+            for(j=0;j<koefMat.column;j++){
+                koefMat.m[i][j] = m.m[i][j];
+            }
+        }
+        return koefMat;
+    }
+
+    public static Matrix constMat(Matrix m){ // membuat Constant Matrix
+        Matrix konsMatrix = new Matrix(m.row,1);
+        int i;
+        for (i=0;i<konsMatrix.row;i++){
+            konsMatrix.m[i][0] = m.m[i][m.column-1];
+        }
+        return konsMatrix;
+    }
+
+    // Matriks Augmented (Penggabungan Coefficient Matrix dan Constant Matrix)
+    public static Matrix createMatAug(Matrix koef, Matrix konst){
+        Matrix hasil = new Matrix(koef.row, koef.column);
+        int i,j,k;
+        for(i=0;i<koef.row;i++){
+            for (j=0;i<koef.column;j++){
+                hasil.m[i][j] = koef.m[i][j];
+            }
+        }
+        for(k=0;k<koef.column;k++){
+            hasil.m[k][koef.column-1] = konst.m[k][0];
+        }
+        return hasil;
+    }   
 }

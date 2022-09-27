@@ -1,4 +1,10 @@
 public class SPL {
+    
+    // Matriks Eselon
+    public static Matrix getEselon(Matrix m){
+        return m;
+    }
+
     // Eliminasi Gauss
     public static void elimGauss(Matrix m){
 
@@ -10,7 +16,7 @@ public class SPL {
     
     // Metode Matriks Balikan
     public static Matrix inverMatrix(Matrix m){
-        
+
         return m;
     }
 

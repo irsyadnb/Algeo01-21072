@@ -40,11 +40,11 @@ public class Matrix {
     public void setELMT(int i, int j, double k){
         this.m[i][j] = k;
     }
-    public void displayMatrix(){
+    public void displayMatrix(Matrix m){
         int i, j;
         for(i=0; i<this.row; i++){
             for(j=0; j<this.column; j++){
-                System.out.print(m[i][j]);
+                System.out.print(m.m[i][j]);
                 if (j != this.column - 1){
                     System.out.print(" ");
                 }
@@ -132,6 +132,15 @@ public class Matrix {
             i++;
         }
         return (ctr == 0);
+    }
+
+    public static boolean isEmpty (double[] m) {
+        for (int i = 0; i < m.length; i++) {
+            if (m[i] != 0) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public static boolean isRowEmpty(Matrix m, int i){ // cek baris kosong

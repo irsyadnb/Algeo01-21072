@@ -1,31 +1,48 @@
+import java.util.*;
+
 public class SPL {
-    // Matriks Eselon Baris
-    public static Matrix eselonBaris(Matrix m){
-        return m;
-    }
-
-    // Matriks Eselon
-    public static Matrix getEselon(Matrix m){
-        return m;
-    }
-
+    static Scanner in = new Scanner(System.in); // Input String
+    static Scanner sc = new Scanner(System.in); // Input integer/double
     // Eliminasi Gauss
-    public static void elimGauss(Matrix m){
+    public static Matrix ubahEselon(Matrix m){
+        int i, j, a, aa, c;
+        boolean keep;
+        double bagi, nilai, k;
+        Matrix mHasil = new Matrix(m.getRow(), m.getColumn());
+        m.copyMatrix(mHasil);
 
-    }
-    // Eliminasi Gauss - Jordan
-    public static void elimGaussJordan(Matrix m){
+        for (i=0; i<mHasil.getRow(); i++){
+            if (mHasil.getELMT(i, i) != 1 || mHasil.getELMT(i, i) == 0){
+                c  = i + 1;
+                keep = true;
+                while (c < mHasil.getRow() && keep){
+                    if (mHasil.getELMT(c, i) == 1){
+                        mHasil.swapRow(i, c);
+                        keep = false;
+                    }
+                    c++;
+                }
+            }
 
-    }
-    
-    // Metode Matriks Balikan
-    public static Matrix inverMatrix(Matrix m){
+            
+            // bagi baris  agar yang pertama jadi 1
+            bagi = 1 / mHasil.getELMT(i, i);
 
-        return m;
-    }
+            for (j=i; j<mHasil.getColumn(); j++){
+                mHasil.setELMT(i, j, (mHasil.getELMT(i, j)*bagi));
+            }
 
-    // Kaidah Cramer
-    public static Matrix Cramer(Matrix m){
-        return m;
+            //membuat elemen di bawah 1 utama menjadi 0
+            for(a=i+1; a<mHasil.getRow(); a++){
+                k = mHasil.getELMT(a, i) / mHasil.getELMT(i, i);
+                for (aa = i; aa < mHasil.getColumn(); aa++){
+                    nilai = mHasil.getELMT(a, aa) - k * mHasil.getELMT(i, aa);
+                    mHasil.setELMT(a, aa, nilai);
+                }
+            }
+            
+        }
+        return mHasil;
+        
     }
 }

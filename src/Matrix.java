@@ -53,6 +53,15 @@ public class Matrix {
         }
         System.out.println();
     }
+    
+    public void copyMatrix(Matrix m){
+        int i,j;
+        for(i=0; i<m.getRow(); i++){
+            for(j=0; j<m.getColumn(); j++){
+                m.setELMT(i, j, this.getELMT(i, j));
+            }
+        }
+    }
 
     public int countELMT(){
         return(this.row * this.column);
@@ -222,3 +231,4 @@ public class Matrix {
         return hasil;
     }   
 }
+

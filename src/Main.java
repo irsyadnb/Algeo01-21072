@@ -30,7 +30,7 @@ public class Main {
                 System.out.println("2. Metode eliminasi Gauss-Jordan");
                 System.out.println("3. Metode matriks balikan");
                 System.out.println("4. Kaidah Cramer");
-                
+                System.out.println("99.Kembali ke Menu Utama");
                 System.out.println();
 
                 System.out.print("Input menu : ");
@@ -39,16 +39,16 @@ public class Main {
                 System.out.println("***************Determinan**************");
                 System.out.println("1. Metode Ekspansi Kofaktor");
                 System.out.println("2. Metode Reduksi Baris");
+                System.out.println("99.Kembali ke Menu Utama");
                 System.out.println();
                 
                 System.out.print("Input menu : ");
                 inputmenu = in.nextLine();
             case "3" :
                 System.out.println("************Matriks Balikan************");
-                System.out.println("1. Metode eliminasi Gauss");
-                System.out.println("2. Metode eliminasi Gauss-Jordan");
-                System.out.println("3. Metode matriks balikan");
-                System.out.println("4. Kaidah Cramer");
+                System.out.println("1. Metode eliminasi Gauss-Jordan");
+                System.out.println("2. Metode Adjoint");
+                System.out.println("99.Kembali ke Menu Utama");
                 System.out.println();
                 
                 System.out.print("Input menu : ");

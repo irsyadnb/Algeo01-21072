@@ -115,7 +115,7 @@ public class Matrix {
         }
     }
 
-    public void otherKRow(int i1, int i2, double k){ // mengurangi baris dengan kelipatan baris lainnya
+    public void otherKRow(int i1, int i2, double k){ // mengurangi baris i1 dengan kelipatan baris i2
         int j;
         for(j=0;j<column;j++){
             this.m[i1][j] -= k * this.m[i2][j];
@@ -240,4 +240,3 @@ public class Matrix {
         return hasil;
     }   
 }
-

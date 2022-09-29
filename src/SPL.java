@@ -54,9 +54,9 @@ public class SPL {
         for (int i = m.getRow()-1 ; i >= 0; i--){ 
             for(int j = m.getColumn()-1 ; j >= 0; j--){
 
-                if (m.getELMT(i, j) == 1){
+                if (m.getELMT(i, j)==1){
                     double factor;
-                    int otherRow = i -1;
+                    int otherRow = i-1;
 
                     while (otherRow >= 0){
                         factor = m.getELMT(otherRow, j);
@@ -64,15 +64,11 @@ public class SPL {
                         m.otherKRow(otherRow, i, factor);
 
                         otherRow--;
-
                     }
                 }
             }
         }
         return m;
     }
-
-    // Solusi Gauss
-
 
 }

@@ -89,11 +89,15 @@ public class SPL {
         cramer = new Matrix(kons.getRow(), 1);
         detkoef = Determinan.detKofaktor(koef);
 
+        //loop kolomnya buat ganti per kolom sama konstanta matriksnya
         for (j=0; j<koef.getColumn(); j++){
+            //biar balik lagi ke matriks koef yang awal
             koef = Matrix.coeffMat(m);
             for (i=0; i<koef.getRow(); i++){
+                // ganti konstanta per barisnya
                 koef.setELMT(i, j, kons.getELMT(i, 0));
             }
+            //hitung determinan cramernya
             detCramer = Determinan.detKofaktor(koef);
             cramer.setELMT(j, 0, detCramer/detkoef);
         }

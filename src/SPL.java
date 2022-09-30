@@ -6,7 +6,7 @@ public class SPL {
     // Eliminasi Gauss
 
     public static Matrix ubahEselon(Matrix m){
-        int i, j, a, aa, c, carinol;
+        int i, j, a, aa, c;
         boolean keep;
         double bagi, nilai, k;
         Matrix mHasil = new Matrix(m.getRow(), m.getColumn());
@@ -28,7 +28,11 @@ public class SPL {
             }
             
             // bagi baris  agar yang pertama jadi 1
-            bagi = 1 / mHasil.getELMT(i, i);
+            if (mHasil.getELMT(i, i) != 0){
+                bagi = 1 / mHasil.getELMT(i, i);
+            } else{
+                break;
+            }
 
             for (j=i; j<mHasil.getColumn(); j++){
                 mHasil.setELMT(i, j, (mHasil.getELMT(i, j)*bagi));
@@ -38,16 +42,9 @@ public class SPL {
             //membuat elemen di bawah 1 utama menjadi 0
             for(a=i+1; a<mHasil.getRow(); a++){
                 k = mHasil.getELMT(a, i) / mHasil.getELMT(i, i);
-                carinol = 0;
                 for (aa = i; aa < mHasil.getColumn(); aa++){
                     nilai = mHasil.getELMT(a, aa) - k * mHasil.getELMT(i, aa);
-                    if (nilai == 0){
-                        carinol++;
-                    }
                     mHasil.setELMT(a, aa, nilai);
-                }
-                if (carinol == 2){
-                    break;
                 }
             }
             

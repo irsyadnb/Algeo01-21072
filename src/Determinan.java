@@ -38,4 +38,39 @@ public class Determinan {
         }
         return Math.abs(hasil);
     }
+
+    public static double detKofaktor(Matrix m){
+        int i, j, k, a, b;
+        double det;
+        Matrix mHasilKof = new Matrix(m.getRow()-1, m.getColumn()-1);
+
+        if (m.getRow() == 1 && m.getColumn() == 1){
+            det = m.getELMT(0, 0);
+        } else if (m.getRow() == 2 && m.getColumn() == 2){
+            det = m.getELMT(1, 1)*m.getELMT(0, 0) - m.getELMT(0, 1)*m.getELMT(1, 0);
+        } else {
+            det = 0;
+            for (k = 0; k < m.getColumn(); k++){
+                a = 0; //menunjuk index baris submatrix
+                for (i = 1; i < m.getRow(); i++){
+                    b = 0; //menunjuk index kolom submatrix
+                    for (j = 0; j < m.getColumn(); j++){
+                        if (k != j){
+                            // set submatrix
+                            mHasilKof.setELMT(a, b, m.getELMT(i, j));
+                            b++;
+                        }
+                    } 
+                    a++;
+                }
+                //cek apakah kofaktor seharusnya negatif atau positif
+                if (k % 2 == 1){
+                    det += -1 * detKofaktor(mHasilKof) * m.getELMT(0, k);
+                } else {
+                    det += detKofaktor(mHasilKof) * m.getELMT(0, k);
+                }
+            }
+        }
+        return det;
+    }
 }

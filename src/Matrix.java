@@ -67,7 +67,7 @@ public class Matrix {
         return(this.row * this.column);
     }
 
-    public void transMatrix(){ //tranpose matrix
+    public Matrix transMatrix(Matrix m){ //tranpose matrix
         int i, j;
         double tmp;
         for (i = 0; i<this.row; i++){
@@ -75,6 +75,21 @@ public class Matrix {
                 tmp = this.m[i][j];
                 this.m[i][j] = this.m[j][i];
                 this.m[j][i] = tmp;
+            }
+        }
+        return m;
+    }
+
+    public void identmMatrix(Matrix m){
+
+        for(int i = 0; i< m.getRow(); i++){
+            for(int j = 0; j < m.getColumn(); j++){
+                if(i !=j){
+                    this.m[i][j] = 0.0f;
+                }
+                else{
+                    this.m[i][j] = 1.0f;
+                }
             }
         }
     }

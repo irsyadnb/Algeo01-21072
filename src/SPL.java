@@ -11,7 +11,7 @@ public class SPL {
         double bagi, nilai, k;
         Matrix mHasil = new Matrix(m.getRow(), m.getColumn());
         m.copyMatrix(mHasil);
-        mHasil.displayMatrix();
+        mHasil.displayMatrix(m);
 
         for (i=0; i<mHasil.getRow(); i++){
             if (mHasil.getELMT(i, i) != 1 || mHasil.getELMT(i, i) == 0){
@@ -60,13 +60,13 @@ public class SPL {
                 if (m.getELMT(i, j) == 1){
                     double factor;
                     int otherRow = i -1;
-                    m.displayMatrix();
+                    m.displayMatrix(m);
 
                     while (otherRow >= 0){
                         factor = m.getELMT(otherRow, j);
                         m.otherKRow(otherRow, i, factor);
                         otherRow--;
-                        m.displayMatrix();
+                        m.displayMatrix(m);
                     }
                 }
             }

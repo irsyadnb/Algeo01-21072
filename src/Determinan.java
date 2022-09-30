@@ -2,6 +2,7 @@ public class Determinan {
     public static double detRedBar(Matrix m){
         Matrix m1 = new Matrix(m.getRow(), m.getColumn());
         m.copyMatrix(m1);
+        double result = 0;
         int ctr = 0;
         int i;
         for(i = 0; i<m1.getRow()-1;i++){
@@ -36,7 +37,10 @@ public class Determinan {
         for(i=ctr;i>0;i--){
             hasil *= -1;
         }
-        return Math.abs(hasil);
+        if(hasil == -0.0){
+            result = Math.abs(hasil);
+        }
+        return result;
     }
 
     public static double detKofaktor(Matrix m){

@@ -24,7 +24,6 @@ public class SPL {
                     }
                     c++;
                 }   
-                mHasil.displayMatrix();
             }
             
             // bagi baris  agar yang pertama jadi 1
@@ -37,7 +36,6 @@ public class SPL {
             for (j=i; j<mHasil.getColumn(); j++){
                 mHasil.setELMT(i, j, (mHasil.getELMT(i, j)*bagi));
             }
-            mHasil.displayMatrix();
 
             //membuat elemen di bawah 1 utama menjadi 0
             for(a=i+1; a<mHasil.getRow(); a++){
@@ -49,7 +47,6 @@ public class SPL {
             }
             
         }
-        mHasil.displayMatrix();
         return mHasil;
     }
 

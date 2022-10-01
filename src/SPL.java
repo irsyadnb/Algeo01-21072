@@ -97,4 +97,23 @@ public class SPL {
         }
         return cramer;
     }
+    
+    //SPL dengan metode matriks balikan
+    public static Matrix inverse(Matrix m){
+        Matrix mKoef, mKons, mHasil;
+        mKoef = new Matrix(m.getRow(), m.getColumn()-1);
+        mKons = new Matrix(m.getRow(), 1);
+        mHasil = new Matrix(mKoef.getRow(), mKoef.getColumn());
+
+        //pisah matrix augmented menjadi dua
+        mKoef = Matrix.coeffMat(m);
+        mKons = Matrix.constMat(m);
+        
+        //inverse matrix spl
+        mKoef = Invers.InversGaussJordan(mKoef);
+        // kalikan inverse dengan matriks konstanta A^-1b = x
+        mHasil = m.kaliMatrix(mKoef, mKons);
+        
+        return mHasil;
+    }
 }

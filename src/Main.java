@@ -52,7 +52,7 @@ class MenuUI {
                     System.out.print("Input menu : ");
                     inputmenu = in.nextLine();
 
-                    if (inputmenu.equals("99")) { //penggunaan equals karena pada if else, string tidak bisa hanya memakai ==
+                    if (inputmenu.equals("99")) { //soalnya kalo pake == gajelas, gatau kenapa
                         break;
                     } 
                     else {

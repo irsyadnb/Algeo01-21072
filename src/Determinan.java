@@ -42,10 +42,9 @@ public class Determinan {
         }
         return result;
     }
-
     public static double detKofaktor(Matrix m){
         int i, j, k, a, b;
-        double det;
+        double det, kof;
         Matrix mHasilKof = new Matrix(m.getRow()-1, m.getColumn()-1);
 
         if (m.getRow() == 1 && m.getColumn() == 1){
@@ -68,11 +67,8 @@ public class Determinan {
                     a++;
                 }
                 //cek apakah kofaktor seharusnya negatif atau positif
-                if (k % 2 == 1){
-                    det += -1 * detKofaktor(mHasilKof) * m.getELMT(0, k);
-                } else {
-                    det += detKofaktor(mHasilKof) * m.getELMT(0, k);
-                }
+                kof = Math.pow(-1, k) * detKofaktor((mHasilKof)) * m.getELMT(0, k);
+                det += kof;
             }
         }
         return det;

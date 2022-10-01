@@ -31,7 +31,7 @@ class MenuUI {
         boolean keluar = false;
         System.out.println("SELAMAT DATANG DI TUBES 1 ALGEO!");
         while (!keluar) {
-            String inputmenu, submenu;
+            String inputmenu, submenu, inputexit;
             int row, col, size;
             Matrix mspl, minv, result;
             double resultd;
@@ -52,7 +52,7 @@ class MenuUI {
                     System.out.print("Input menu : ");
                     inputmenu = in.nextLine();
 
-                    if (inputmenu.equals("99")) { //soalnya kalo pake == gajelas, gatau kenapa
+                    if (inputmenu.equals("99")) { //soalnya kalo pake == gajelas, audah knapa
                         break;
                     } 
                     else {
@@ -84,9 +84,9 @@ class MenuUI {
                             break;
                         }
                         dispExit();
-                        inputmenu = in.nextLine();
+                        inputexit = in.nextLine();
 
-                        switch (inputmenu) {
+                        switch (inputexit) {
                             case "1":
                                 keluar = true;
                                 break;
@@ -127,8 +127,8 @@ class MenuUI {
                             break;
                     }  
                     dispExit();
-                    inputmenu = in.nextLine();
-                    switch (inputmenu) {
+                    inputexit = in.nextLine();
+                    switch (inputexit) {
                         case "1":
                             keluar = true;
                             break;
@@ -184,9 +184,9 @@ class MenuUI {
                         }
                     }
                     dispExit();
-                    inputmenu = in.nextLine();
+                    inputexit = in.nextLine();
 
-                    switch (inputmenu) {
+                    switch (inputexit) {
                     case "1":
                         keluar = true;
                         break;
@@ -213,9 +213,9 @@ class MenuUI {
                     System.out.println("************Interpolasi Bicubic************");
 
                     dispExit();
-                    inputmenu = in.nextLine();
+                    inputexit = in.nextLine();
 
-                    switch (inputmenu) {
+                    switch (inputexit) {
                         case "1":
                             keluar = true;
                             break;
@@ -226,10 +226,11 @@ class MenuUI {
                 
                 case "6"://regresi linier berganda
                     System.out.println("************Regresi Linier Berganda************");
+                    
                     dispExit();
-                    inputmenu = in.nextLine();
+                    inputexit = in.nextLine();
 
-                    switch (inputmenu) {
+                    switch (inputexit) {
                         case "1":
                             keluar = true;
                             break;

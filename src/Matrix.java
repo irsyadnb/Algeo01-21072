@@ -80,15 +80,14 @@ public class Matrix {
         return m;
     }
 
-    public void identmMatrix(Matrix m){
-
-        for(int i = 0; i< m.getRow(); i++){
-            for(int j = 0; j < m.getColumn(); j++){
-                if(i !=j){
-                    this.m[i][j] = 0.0f;
-                }
-                else{
-                    this.m[i][j] = 1.0f;
+    public void MatrixIdentitas(){
+        int i, j;
+        for (i=0; i < row; i++){
+            for (j=0; j < column; j++){
+                if (i==j){
+                    this.m[i][j]=1.0f;
+                } else {
+                    this.m[i][j]=0.0f;
                 }
             }
         }
@@ -137,17 +136,6 @@ public class Matrix {
         }
     }
 
-    public static boolean isUnder0(Matrix m, int i, int j){ // cek elemen dibawah == 0
-        int ctr;
-        ctr =0;
-        while(i+1 < m.row && ctr == 0){
-            if (m.getELMT(i,j) != 0){
-                ctr += 1;
-            }
-            i++;
-        }
-        return (ctr == 0);
-    }
 
     public static boolean isEmpty (double[] m) {
         for (int i = 0; i < m.length; i++) {
@@ -191,32 +179,6 @@ public class Matrix {
 
     }
 
-    public static int idxLeadOne(Matrix m, int i){ // mencari satu utama pada suatu baris
-        int j,ctr;
-        ctr = 0;
-        for(j=0;j<m.column;j++){
-            if(m.getELMT(i, j) == 1){
-                ctr = j;
-            }
-        }
-        return ctr;
-    }
-
-
-    public static boolean isDiagEQOne(Matrix m){ //cek diagonal apakah bernilai 1
-        int i;
-        boolean isOne;
-        i = 0;
-        isOne = true;
-        while (i<m.getRow() && isOne){
-            if (m.getELMT(i, i) != 1){
-                isOne = false;
-            }
-            i++;
-        }
-        return isOne;
-    }
-
 
     // Pembuatan Matrix Augmented //
 
@@ -239,19 +201,5 @@ public class Matrix {
         }
         return konsMatrix;
     }
-
-    // Matriks Augmented (Penggabungan Coefficient Matrix dan Constant Matrix)
-    public static Matrix createMatAug(Matrix koef, Matrix konst){
-        Matrix hasil = new Matrix(koef.row, koef.column);
-        int i,j,k;
-        for(i=0;i<koef.row;i++){
-            for (j=0;i<koef.column;j++){
-                hasil.m[i][j] = koef.m[i][j];
-            }
-        }
-        for(k=0;k<koef.column;k++){
-            hasil.m[k][koef.column-1] = konst.m[k][0];
-        }
-        return hasil;
-    }   
+ 
 }

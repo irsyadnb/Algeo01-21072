@@ -9,8 +9,6 @@ public class test {
         Matrix m;
         m = new Matrix(inputrow, inputcol);
         m.readMatrix();
-        m.displayMatrix(SPL.ubahEselon(m));
-        m.displayMatrix(SPL.ubahEselonReduksi(m));
-        System.out.printf("%f\n", Determinan.detRedBar(m));
+        m.displayMatrix(SPL.Cramer(m));
     }   
 }

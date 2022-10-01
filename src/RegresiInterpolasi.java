@@ -38,9 +38,9 @@ public class RegresiInterpolasi {
         persamaan = "p" + (mHasil.getRow()-1) + "(X) = " + pers;
 
         for (i=1; i<mHasil.getRow(); i++){
-            //bila negatif diberi kurung pemisah
             pers = mHasil.getELMT(i, 0);
             pers = new BigDecimal(pers).setScale(4, RoundingMode.HALF_UP).doubleValue();
+            //bila negatif diberi kurung pemisah
             if (mHasil.getELMT(i, 0) < 0){
                 persamaan += " + (" + (pers) + "X^" + i + ")";
             } else {

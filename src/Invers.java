@@ -73,84 +73,67 @@ public class Invers {
         return m2;
      }
     
-  // Mencari kofaktor matriks
-    public static Matrix getKofMatrix (Matrix m, int pivotrow, int pivotcol) {
-        int i, j;
-        int ikof = 0, jkof = 0;
-        Matrix kof = new Matrix((m.getRow() - 1), (m.getColumn() - 1));
-        // Ukuran matriks lebih dari 2x2
-        if (m.countELMT() != 4) {
-            for (i = 0; i < m.getRow(); i++) {
-                for (j = 0; j < m.getColumn(); j++) {
-                    if ((i != pivotrow) && (j != pivotcol)) { //Memindahkan matriks m ke matriks kofaktor
-                        kof.setELMT(ikof, jkof, m.getELMT(i, j));
-                        jkof++;
-                    if (jkof == (m.getColumn() - 1)) { // Iterasi indeks baris matriks kofaktor
-                        jkof = 0;
-                        ikof++;
-                    }
-                }
-            }
-        }   
-    }
-      return kof;
+    // Mencari kofaktor matriks
+  public static Matrix getKofMatrix (){
+
+  int a = 0, b = 0; //index m1
+  int tanda = 1;
+  Matrix kofaktor = new Matrix(m.getRow(), m.getColumn());
+  Determinan det = new Determinan();
+  double determinan;
+  for (int j = 0; j < m.getColumn(); j++){
+      Matrix m1 = new Matrix(m.getRow() - 1, m.getColumn() - 1);
+  for (int i = 0; i < m.getRow(); i++){
+      if (i % 2 == 0){
+          tanda = 1;
+      }
+      else {
+          tanda = -1;
+      }
+          for (int c = 0 ; c < m.getRow() ; c++){
+              for (int d = 0 ; d < m.getColumn() ; d++){
+                  if (c != i && d != j){
+                      m1.Mat[a][b] = m.getELMT(c, d);
+                      if (b + 1 < m1.getColumn()){
+                          b++;
+                      }
+                      else if (a + 1 < m1.getRow()){
+                          a++; b = 0;
+                      }
+                  }
+              }
+          }
+              a = 0; b = 0;
+              kofaktor.Mat[i][j] = det.detKofaktor(m1) * tanda;
+              tanda *= -1;
+          }
+      }
+      return kofaktor;
 }
   
   // Mencari adj matriks
-  public static Matrix getAdj(Matrix m) {
-      int i, j;
-      int tanda = 1;
-      double kofaktor;
-      Matrix kof = new Matrix(m.getRow(), m.getColumn());
-      Matrix tempkof = new Matrix(m.getRow(), m.getColumn());
-      // Ukuran matriks 3x3
-      for (i = 0; i < m.getRow(); i++) {
-        for (j = 0; j < m.getColumn(); j++) {
-          if ((i + j) % 2 == 0) { //Ubah tanda + dan -
-            tanda = 1;
-          } 
-          else {
-            tanda = -1;
-          }
-          tempkof = getKofMatrix(m, i, j);
-          kofaktor = Determinan.detKofaktor(tempkof) * tanda; // Mencari determinan matriks kofaktor
-          kof.setELMT(i, j, kofaktor);
-        }
+  public static Matrix getAdj(){
+    if (m.getRow() == 1 && m.getColumn() == 1){
+        m.Mat[0][0] = 1; 
+        return m;
       }
-      return (kof.transMatrix(m));
-    }
+    else {
+    Matrix matadj;
+    matadj = m.getKofMatrix();
+    return matadj.transMatrix();
+  }
+}
   
     // Mencari inv matriks dengan matriks adj
-    public static Matrix adjInv(Matrix m) {
-      int i, j;
-      Matrix invbiasa = new Matrix(m.getRow(), m.getColumn());
-      Matrix adj = new Matrix(m.getRow(), m.getColumn());
-      Matrix inv = new Matrix(m.getRow(), m.getColumn());
-      double matInv, det;
-      adj = getAdj(m);
-      det = Determinan.detKofaktor(m);
-  
-      // Ukuran matriks 2x2
-      if (m.countELMT() == 4) {
-        invbiasa.setELMT(0, 0, m.getELMT(1, 1));
-        invbiasa.setELMT(1, 1, m.getELMT(0, 0));
-        invbiasa.setELMT(0, 1, (-1) * m.getELMT(0, 1));
-        invbiasa.setELMT(1, 0, (-1) * m.getELMT(1, 0));
-        for (i = 0; i < m.getRow(); i++) {
-          for (j = 0; j < m.getColumn(); j++) {
-            matInv = (invbiasa.getELMT(i, j) / det);
-            inv.setELMT(i, j, matInv);
+    public static Matrix adjInv(){
+      Determinan det = new Determinan();
+      double determinan = det.detKofaktor(m);
+      Matrix matInv = m.adj();
+      for (int i = 0 ; i < matInv.getRow() ; i++){
+          for (int j = 0 ; j < matInv.getColumn() ; j++){
+              matInv.Mat[i][j] *= (1 / determinan);
           }
-        }
-      } 
-      else {
-        for (i = 0; i < m.getRow(); i++) {
-          for (j = 0; j < m.getColumn(); j++) {
-            matInv = (adj.getELMT(i, j) / det);
-            inv.setELMT(i, j, matInv);
-          }
-        }
       }
-      return inv;
-    }
+      return matInv;
   }
+}

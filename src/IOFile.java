@@ -93,25 +93,6 @@ public class IOFile {
     return m;
   }
   */
-  public static void writeMatrix(Matrix m, String fileName) {
-    int i, j;
-
-    try {
-      PrintWriter write = new PrintWriter(fileName);
-      for (i = 0; i < m.row; i++) {
-        for (j = 0; j < m.column; j++) {
-          write.print(m.getELMT(i, j));
-          if (j != m.column - 1) {
-            write.print(" ");
-          }
-        }
-        write.println();
-      }
-      write.close();
-    } catch (Exception e) {
-      System.out.println("Error");
-    }
-  }
 
   //Save File
   public static void simpanMatrix(String namaFile, Matrix m){

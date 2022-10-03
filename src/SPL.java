@@ -177,4 +177,17 @@ public class SPL {
         }
         System.out.println(hasil);
     }  
+    
+    public static String SolusiInversCramer(Matrix m){
+        int i, j, a;
+        String hasil = "";
+
+        for (i=0; i<m.getRow(); i++){
+            a = i+1;
+            for(j=0; j<m.getColumn(); j++){
+                hasil += ("x" + a +  " = " + m.getELMT(i, j));
+            }
+        }
+        return hasil;
+    }
 }

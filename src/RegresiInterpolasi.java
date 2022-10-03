@@ -52,14 +52,12 @@ public class RegresiInterpolasi {
     }
 
     public static void InterpolasiBikubik(Matrix m, int x, int y){
-        int i, j, k, a, b, idxi, idxj, p, q;
-        double hasil;
+        int i, j, k, a, b, idxi, idxj, sumA;
+        double temp;
         Matrix mBikubik = new Matrix (16, 16);
         Matrix mInverse = new Matrix (mBikubik.getRow(), mBikubik.getColumn());
         Matrix mTemp = new Matrix (16, 1);
         Matrix mHasil = new Matrix (mInverse.getRow(), mTemp.getColumn());
-        p = x+1;
-        q = y+1;
 
         //-1,0,1,2
         idxi = 0;
@@ -76,6 +74,7 @@ public class RegresiInterpolasi {
             }
         }
         mInverse = Invers.InversGaussJordan(mBikubik);
+        mInverse.displayMatrix();
 
         //buat matrix 4x4 jadi 16x1
         k = 0;
@@ -85,11 +84,24 @@ public class RegresiInterpolasi {
                 k++;
             }
         }
+        mTemp.displayMatrix();
+        System.out.println(("."));
         // kali inverse matriks bikubik dengan matrix 4x4
-        mHasil.kaliMatrix(mInverse, mTemp);
-        hasil = mHasil.getELMT(p, q);
+        mHasil = mTemp.kaliMatrix(mInverse, mTemp);
+        mHasil.displayMatrix();
 
-        System.out.println("Hasil dari interpolasi bikubik dengan x = " + x + " dan y = " + y + " adalah " + hasil);
+        k=0;
+        temp = mHasil.getELMT(k, 0) ;
+        sumA=0;
+        for(i=0; i<4; i++){
+            for(j=0; j<4; j++){
+                temp = new BigDecimal(temp).setScale(4, RoundingMode.HALF_UP).doubleValue();
+                sumA += temp * Math.pow(x, i) * Math.pow(y, j);
+                k++;
+            }
+        }
+
+        System.out.println("Hasil dari interpolasi bikubik dengan titik x = " + x + " dan titik y = " + y + " adalah " +sumA);
     }
 
     public static void RegresiLinierGanda(Matrix m, Matrix n){

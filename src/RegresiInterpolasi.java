@@ -20,10 +20,9 @@ public class RegresiInterpolasi {
             }
             mIntPol.setELMT(i, j, m.getELMT(i, m.getColumn()-1));
         }
-        mIntPol.displayMatrix();
 
         mHasil = SPL.Cramer(mIntPol);
-        mHasil.displayMatrix();
+
         //menghitung taksiran polinom interpolasi yang melalui i titik
         hasilfungsi = 0;
         for (i=0; i<m.getRow(); i++){
@@ -51,7 +50,7 @@ public class RegresiInterpolasi {
         System.out.println("Hasil taksir dengan persamaan polinom " + persamaan + " adalah " + hasilfungsi);
     }
 
-    public static void InterpolasiBikubik(Matrix m, int x, int y){
+    public static void InterpolasiBikubik(Matrix m, double x, double y){
         int i, j, k, a, b, idxi, idxj, sumA;
         double temp;
         Matrix mBikubik = new Matrix (16, 16);
@@ -74,7 +73,6 @@ public class RegresiInterpolasi {
             }
         }
         mInverse = Invers.InversGaussJordan(mBikubik);
-        mInverse.displayMatrix();
 
         //buat matrix 4x4 jadi 16x1
         k = 0;
@@ -84,11 +82,9 @@ public class RegresiInterpolasi {
                 k++;
             }
         }
-        mTemp.displayMatrix();
-        System.out.println(("."));
+
         // kali inverse matriks bikubik dengan matrix 4x4
         mHasil = mTemp.kaliMatrix(mInverse, mTemp);
-        mHasil.displayMatrix();
 
         k=0;
         temp = mHasil.getELMT(k, 0) ;

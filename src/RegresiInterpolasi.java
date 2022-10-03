@@ -98,13 +98,14 @@ public class RegresiInterpolasi {
         System.out.println("Hasil dari interpolasi bikubik dengan titik f(" + x + "," + y + ") = " +sumA);
     }
 
-    public static void RegresiLinierGanda(Matrix m, Matrix n){
+    public static void RegresiLinierGanda(Matrix m, Matrix x){
         int i, j, k, variabel, idx, idxj;
         double temp, hasilreg, pers;
         String persamaan;
-        variabel = n.getColumn();
-        Matrix mHasil;
+        variabel = x.getColumn();
+        
         Matrix mRLB = new Matrix(variabel+1, variabel+2);
+        Matrix mHasil = new Matrix(mRLB.getRow(), mRLB.getColumn());;
 
         for(i=0; i<mRLB.getRow(); i++){
             idx = i-1;
@@ -122,36 +123,37 @@ public class RegresiInterpolasi {
                     mRLB.setELMT(i, j, m.getRow());
                 } else if (i!=0 && j==0){
                     mRLB.setELMT(i, j, mRLB.getELMT(j, i));
+                    mRLB.setELMT(i, idxj, temp);
                 }
-                mRLB.setELMT(i, idxj, temp);
+                
             }
         }
-        mHasil = SPL.Cramer(mRLB);
+        mHasil = SPL.inverse(mRLB);
+        mHasil.displayMatrix();
 
         hasilreg = mHasil.getELMT(0, 0);
         for (i=0; i<variabel; i++){
-            hasilreg += n.getELMT(0, i) * mHasil.getELMT(i+1, 0);
+            hasilreg += x.getELMT(0, i) * mHasil.getELMT(i+1, 0);
         }
-        // set 4 angka di belakang koma
-        hasilreg = new BigDecimal(hasilreg).setScale(4, RoundingMode.HALF_UP).doubleValue();
 
         // membuat persamaan
         pers = mHasil.getELMT(0, 0);
-        pers = new BigDecimal(pers).setScale(4, RoundingMode.HALF_UP).doubleValue();
         persamaan = "y = " + pers;
 
         for (i=1; i<mHasil.getRow(); i++){
             //bila negatif diberi kurung pemisah
             pers = mHasil.getELMT(i, 0);
-            pers = new BigDecimal(pers).setScale(4, RoundingMode.HALF_UP).doubleValue();
             if (mHasil.getELMT(i, 0) < 0){
                 persamaan += " + (" + (pers) + "X" + i + ")";
             } else {
                 persamaan += " + " + (pers) + "X" + i;
             }
         }
+        mHasil.displayMatrix();
 
         System.out.println("Hasil taksir dengan persamaan regresi " + persamaan + " adalah " + hasilreg);
+
+
     }
 }
 

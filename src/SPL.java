@@ -74,6 +74,7 @@ public class SPL {
         return m;
     }
 
+    // Kaidah Cramer
     public static Matrix Cramer(Matrix m){
         int i,j;
         double detkoef, detCramer;
@@ -84,18 +85,24 @@ public class SPL {
         detkoef = Determinan.detKofaktor(koef);
 
         //loop kolomnya buat ganti per kolom sama konstanta matriksnya
-        for (j=0; j<koef.getColumn(); j++){
-            //biar balik lagi ke matriks koef yang awal
-            koef = Matrix.coeffMat(m);
-            for (i=0; i<koef.getRow(); i++){
-                // ganti konstanta per barisnya
-                koef.setELMT(i, j, kons.getELMT(i, 0));
+        if (detkoef != 0){
+            for (j=0; j<koef.getColumn(); j++){
+                //biar balik lagi ke matriks koef yang awal
+                koef = Matrix.coeffMat(m);
+                for (i=0; i<koef.getRow(); i++){
+                    // ganti konstanta per barisnya
+                    koef.setELMT(i, j, kons.getELMT(i, 0));
+                }
+                //hitung determinan cramernya
+                detCramer = Determinan.detKofaktor(koef);
+                cramer.setELMT(j, 0, detCramer/detkoef);
             }
-            //hitung determinan cramernya
-            detCramer = Determinan.detKofaktor(koef);
-            cramer.setELMT(j, 0, detCramer/detkoef);
+            return cramer;
+        } else{
+            System.out.println("Matriks merupakan matriks singular. Tidak dapat melakukan Kaidah Cramer.");
+            return m;
         }
-        return cramer;
+
     }
     
     //SPL dengan metode matriks balikan

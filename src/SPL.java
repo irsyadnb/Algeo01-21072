@@ -123,4 +123,58 @@ public class SPL {
         
         return mHasil;
     }
+    //Solusi untuk Gauss
+    public static void solusiGauss(Matrix m){
+        //prekondisi matrix augmented
+        int i = m.getRow()-1;
+        int a, j, k, sumnol, counter;
+        double [] temp = new double [26];
+        boolean solusi;
+        solusi = true;
+        String hasil = "";
+        while (solusi && i >= 0){
+            sumnol = 0;
+            for (j=0; j<m.getColumn()-1;j++){
+                if(m.getELMT(i, j) == 0){
+                    sumnol++;
+                }
+                if (sumnol == m.getColumn()-1 && m.getELMT(i, m.getColumn()-1) != 0){
+                    solusi = false;
+                }
+            }
+            i--;
+        }
+
+        if (solusi == false){
+            hasil ="Tidak ada solusi untuk SPL ini.";
+        } else{
+            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagEQOne(m))){
+                i=0;
+                a = i+1;
+                hasil = "x" + a + " = " + m.getELMT(i, m.getColumn()-1);
+                for(i=1; i<m.getRow(); i++){
+                    a = i+1;
+                    hasil += ", x" + a + " = " + m.getELMT(i, m.getColumn()-1);
+                }
+            } else {
+                k = 0;
+                for (i=m.getRow()-1; i>=0; i++){
+                    counter=0;
+                    for (j=0; j<m.getColumn()-1;j++){
+                        if (m.getELMT(i, j) != 0){
+                            counter++;
+                            temp[k] = j;  
+                        }
+                    }
+                    if (counter == 1){
+                        hasil += "x" + (temp[k]+1) + " = " + (m.getELMT(i, m.getColumn()-1)/m.getELMT(i, j));
+                        k++;
+                    } else {
+                        System.out.println("Program parametrik belum tersedia");
+                    }
+                }
+            }
+        }
+        System.out.println(hasil);
+    }  
 }

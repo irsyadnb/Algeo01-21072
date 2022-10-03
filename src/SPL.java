@@ -170,7 +170,7 @@ public class SPL {
                         hasil += "x" + (temp[k]+1) + " = " + (m.getELMT(i, m.getColumn()-1)/m.getELMT(i, j));
                         k++;
                     } else {
-                        System.out.println("Program parametrik belum tersedia");
+                        hasil += ("Program parametrik belum tersedia");
                     }
                 }
             }

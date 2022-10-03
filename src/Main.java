@@ -33,8 +33,8 @@ class MenuUI {
         while (!keluar) {
             String inputmenu, submenu, inputexit;
             int row, col, size;
-            Matrix mspl, minv, result;
-            double resultd;
+            Matrix m, mspl, minv, result;
+            double resultd, x, y;
 
             dispMenu();
             inputmenu = in.nextLine();
@@ -196,6 +196,16 @@ class MenuUI {
 
                 case "4"://interpolasi polinom
                     System.out.println("************Interpolasi Polinom************");
+                    System.out.print("Jumlah data : ");
+                    row = inint.nextInt();
+                    m = new Matrix(row, 2);
+                    System.out.println("Input data :  ");
+                    m.readMatrix();
+
+                    System.out.println("Masukkan x : ");
+                    x = inint.nextDouble();
+
+                    RegresiInterpolasi.InterpolasiPolinom(m, x);
 
                     dispExit();
                     inputmenu = in.nextLine();
@@ -211,6 +221,20 @@ class MenuUI {
 
                 case "5"://interpolasi bicubic
                     System.out.println("************Interpolasi Bicubic************");
+                    System.out.print("Baris: ");
+                    row = inint.nextInt();
+                    System.out.print("Kolom: ");
+                    col = inint.nextInt();
+                    m = new Matrix(row, col);
+                    System.out.println("Input elemen matriks: ");
+                    m.readMatrix();
+
+                    System.out.println("Masukkan titik x : ");
+                    x = inint.nextDouble();
+                    System.out.println("Masukkan titik y : ");
+                    y = inint.nextDouble();
+
+                    RegresiInterpolasi.InterpolasiBikubik(m, x, y);
 
                     dispExit();
                     inputexit = in.nextLine();
@@ -227,6 +251,7 @@ class MenuUI {
                 case "6"://regresi linier berganda
                     System.out.println("************Regresi Linier Berganda************");
                     
+
                     dispExit();
                     inputexit = in.nextLine();
 

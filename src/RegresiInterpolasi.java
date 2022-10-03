@@ -127,7 +127,6 @@ public class RegresiInterpolasi {
             }
         }
         mHasil = SPL.Cramer(mRLB);
-        mHasil.displayMatrix();
 
         hasilreg = mHasil.getELMT(0, 0);
         for (i=0; i<variabel; i++){
@@ -151,7 +150,6 @@ public class RegresiInterpolasi {
                 persamaan += " + " + (pers) + "X" + i;
             }
         }
-        mHasil.displayMatrix();
 
         System.out.println("Hasil taksir dengan persamaan regresi " + persamaan + " adalah " + hasilreg);
     }

@@ -11,7 +11,6 @@ public class SPL {
         double bagi, nilai, k;
         Matrix mHasil = new Matrix(m.getRow(), m.getColumn());
         m.copyMatrix(mHasil);
-        mHasil.displayMatrix(m);
 
         for (i=0; i<mHasil.getRow(); i++){
             if (mHasil.getELMT(i, i) != 1 || mHasil.getELMT(i, i) == 0){
@@ -60,13 +59,11 @@ public class SPL {
                 if (m.getELMT(i, j) == 1){
                     double factor;
                     int otherRow = i -1;
-                    m.displayMatrix(m);
 
                     while (otherRow >= 0){
                         factor = m.getELMT(otherRow, j);
                         m.otherKRow(otherRow, i, factor);
                         otherRow--;
-                        m.displayMatrix(m);
                     }
                 }
             }
@@ -74,7 +71,6 @@ public class SPL {
         return m;
     }
 
-    // Kaidah Cramer
     public static Matrix Cramer(Matrix m){
         int i,j;
         double detkoef, detCramer;
@@ -117,14 +113,15 @@ public class SPL {
         mKons = Matrix.constMat(m);
         
         //inverse matrix spl
-        mKoef = Invers.InversGaussJordan(mKoef);
+        Invers.InversGaussJordan(mKoef);
         // kalikan inverse dengan matriks konstanta A^-1b = x
         mHasil = m.kaliMatrix(mKoef, mKons);
         
         return mHasil;
     }
+
     //Solusi untuk Gauss
-    public static String solusiGauss(Matrix m){
+    public static String solusiSPL(Matrix m){
         //prekondisi matrix augmented
         int i = m.getRow()-1;
         int a, j, k, sumnol, counter;
@@ -148,7 +145,7 @@ public class SPL {
         if (solusi == false){
             hasil ="Tidak ada solusi untuk SPL ini.";
         } else{
-            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagEQOne(m))){
+            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagonalOne(m))){
                 i=0;
                 a = i+1;
                 hasil = "x" + a + " = " + m.getELMT(i, m.getColumn()-1);
@@ -170,14 +167,14 @@ public class SPL {
                         hasil += "x" + (temp[k]+1) + " = " + (m.getELMT(i, m.getColumn()-1)/m.getELMT(i, j));
                         k++;
                     } else {
-                        System.out.println("Program parametrik belum tersedia");
+                        hasil += "Program parametrik belum tersedia";
                     }
                 }
             }
         }
         return hasil;
     }  
-    
+
     public static String SolusiInversCramer(Matrix m){
         int i, j, a;
         String hasil = "";

@@ -40,11 +40,11 @@ public class Matrix {
     public void setELMT(int i, int j, double k){
         this.m[i][j] = k;
     }
-    public void displayMatrix(Matrix m){
+    public void displayMatrix(){
         int i, j;
         for(i=0; i<this.row; i++){
             for(j=0; j<this.column; j++){
-                System.out.print(m.m[i][j]);
+                System.out.print(m[i][j]);
                 if (j != this.column - 1){
                     System.out.print(" ");
                 }
@@ -202,6 +202,14 @@ public class Matrix {
         return konsMatrix;
     }
     
+    public static Double eval(String s) {
+        if (s.split("/").length == 1) {
+          return Double.parseDouble(s);
+        } else {
+          return Double.parseDouble(s.split("/")[0]) / Double.parseDouble(s.split("/")[1]);
+        }
+      }
+
     public static boolean isDiagonalOne(Matrix m){ //cek diagonal apakah bernilai 1
         int i;
         boolean isOne;
@@ -215,5 +223,6 @@ public class Matrix {
         }
         return isOne;
     }
- 
+      
 }
+

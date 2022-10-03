@@ -3,7 +3,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 public class RegresiInterpolasi {
-    public static void InterpolasiPolinom (Matrix m, double x){
+    public static String InterpolasiPolinom (Matrix m, double x){
         int i, j;
         String persamaan;
         double awal,k;
@@ -46,11 +46,10 @@ public class RegresiInterpolasi {
                 persamaan += " + " + (pers) + "X^" + i;
             }
         }
-
-        System.out.println("Hasil taksir dengan persamaan polinom " + persamaan + " adalah " + hasilfungsi);
+        return("Hasil taksir dengan persamaan polinom " + persamaan + " adalah " + hasilfungsi);
     }
 
-    public static void InterpolasiBikubik(Matrix m, double x, double y){
+    public static String InterpolasiBikubik(Matrix m, double x, double y){
         int i, j, k, a, b, idxi, idxj;
         double temp, sumA;
         Matrix mBikubik = new Matrix (16, 16);
@@ -95,10 +94,10 @@ public class RegresiInterpolasi {
             }
         }
         sumA = new BigDecimal(sumA).setScale(4, RoundingMode.HALF_UP).doubleValue();
-        System.out.println("Hasil dari interpolasi bikubik dengan titik f(" + x + "," + y + ") = " +sumA);
+        return("Hasil dari interpolasi bikubik dengan titik f(" + x + "," + y + ") = " +sumA);
     }
 
-    public static void RegresiLinierGanda(Matrix m, Matrix x){
+    public static String RegresiLinierGanda(Matrix m, Matrix x){
         int i, j, k, variabel, idx, idxj;
         double temp, hasilreg, pers;
         String persamaan;
@@ -151,7 +150,7 @@ public class RegresiInterpolasi {
         }
         mHasil.displayMatrix();
 
-        System.out.println("Hasil taksir dengan persamaan regresi " + persamaan + " adalah " + hasilreg);
+        return("Hasil taksir dengan persamaan regresi " + persamaan + " adalah " + hasilreg);
 
 
     }

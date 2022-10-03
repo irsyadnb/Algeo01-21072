@@ -336,8 +336,7 @@ class MenuUI {
                 
                 case "6"://regresi linier berganda
                     System.out.println("************Regresi Linier Berganda************");
-                    
-
+                    System.out.println("Program tidak ada");
                     dispExit();
                     inputexit = in.nextLine();
 

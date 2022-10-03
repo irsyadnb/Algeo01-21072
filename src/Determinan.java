@@ -1,7 +1,7 @@
 public class Determinan {
     public static double detRedBar(Matrix m){
         int x, i, j, k, row;
-        double num1, num2, num3, temp;
+        double bi1, bil2, bil3, temp;
         double det, total;
     
         row = m.getRow();
@@ -26,13 +26,13 @@ public class Determinan {
             }
             // OBE
             for (j = i+1; j<row; j++) {
-                num1 = m.getELMT(i, i);
-                num2 = m.getELMT(j, i);
+                bi1 = m.getELMT(i, i);
+                bil2 = m.getELMT(j, i);
                 for (k=0; k<row; k++) {
-                    num3 = (num1*m.getELMT(j, k)) - (num2*m.getELMT(i, k));
-                    m.setELMT(j, k, num3);
+                    bil3 = (bi1*m.getELMT(j, k)) - (bil2*m.getELMT(i, k));
+                    m.setELMT(j, k, bil3);
                 }
-                total *= num1;
+                total *= bi1;
             }
         }
         // Determinan
@@ -73,3 +73,4 @@ public class Determinan {
         return det;
     }
 }
+

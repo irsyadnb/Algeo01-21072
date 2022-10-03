@@ -201,5 +201,19 @@ public class Matrix {
         }
         return konsMatrix;
     }
+    
+    public static boolean isDiagonalOne(Matrix m){ //cek diagonal apakah bernilai 1
+        int i;
+        boolean isOne;
+        i = 0;
+        isOne = true;
+        while (i<m.getRow() && isOne){
+            if (m.getELMT(i, i) != 1){
+                isOne = false;
+            }
+            i++;
+        }
+        return isOne;
+    }
  
 }

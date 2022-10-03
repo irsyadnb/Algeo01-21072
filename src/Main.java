@@ -165,7 +165,7 @@ class MenuUI {
                                     System.out.println("Determinan = 0, tidak ada matriks balikan");
                                 } 
                                 else {
-                                    result = Invers.gaussInv(minv);
+                                    result = Invers.InversGaussJordan(minv);
                                     System.out.println("Hasil matriks balikan (gauss-jordan) : ");
                                     result.displayMatrix(result);
                                 }

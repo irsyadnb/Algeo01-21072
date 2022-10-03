@@ -124,7 +124,7 @@ public class SPL {
         return mHasil;
     }
     //Solusi untuk Gauss
-    public static void solusiGauss(Matrix m){
+    public static String solusiGauss(Matrix m){
         //prekondisi matrix augmented
         int i = m.getRow()-1;
         int a, j, k, sumnol, counter;
@@ -148,7 +148,7 @@ public class SPL {
         if (solusi == false){
             hasil ="Tidak ada solusi untuk SPL ini.";
         } else{
-            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagonalOne(m))){
+            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagEQOne(m))){
                 i=0;
                 a = i+1;
                 hasil = "x" + a + " = " + m.getELMT(i, m.getColumn()-1);
@@ -170,12 +170,12 @@ public class SPL {
                         hasil += "x" + (temp[k]+1) + " = " + (m.getELMT(i, m.getColumn()-1)/m.getELMT(i, j));
                         k++;
                     } else {
-                        hasil += ("Program parametrik belum tersedia");
+                        System.out.println("Program parametrik belum tersedia");
                     }
                 }
             }
         }
-        System.out.println(hasil);
+        return hasil;
     }  
     
     public static String SolusiInversCramer(Matrix m){

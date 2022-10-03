@@ -19,8 +19,6 @@ public class IOFile {
     this.rows = rows;
     this.cols = cols;
     this.matrix = new double[rows][cols];
-    //NOTE : INI DI GOOGLE TERNYATA KALAU UDAH DI CONSTRUCT ROW SAMA BARISNYA, UDAH GABISA DIUBAH LAGI SIZE MATRIXNYA
-    //KALAU MAU GANTI SIZE KARENA GACUKUP BIKIN VARIABEL BARU AJA PAKAI EXTENDMATRIX()
 }
 
   public void bukaFile() {

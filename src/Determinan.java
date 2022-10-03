@@ -1,46 +1,45 @@
 public class Determinan {
     public static double detRedBar(Matrix m){
-        Matrix m1 = new Matrix(m.getRow(), m.getColumn());
-        m.copyMatrix(m1);
-        double result = 0;
-        int ctr = 0;
-        int i;
-        for(i = 0; i<m1.getRow()-1;i++){
-            if(m1.getELMT(i, i) == 0){
-                boolean done = false;
-                int k = i+1;
-                while(k<m1.getRow() && !done){  
-                    if(m1.getELMT(k, i) != 0){ // jika elemen bawah != 0, tukar.
-                        m1.swapRow(i, k); 
-                        done = true;
-                        ctr++;
-                    }
-                }
-            }
-            for(int j=i+1; j<m1.getRow(); j++){ //OBE
-                if(m1.getELMT(j, i) != 0){ //cek elemen bawah 0 atau bukan
-                    double x = m1.getELMT(j, i) / m1.getELMT(i, i);
-                    m1.otherKRow(j, i, x); 
-                }
-            }
-        }
-        // sudah terbentuk matrix segitiga bawah
+        int x, i, j, k, row;
+        double num1, num2, num3, temp;
+        double det, total;
+    
+        row = m.getRow();
+        det = 1;
+        total = 1;
 
-        // melakukan perkalian diagonal untuk determinan\
-        double hasil = 1;
-        
-        for(i=0;i<m.getRow();i++){
-            hasil *= m1.getELMT(i, i);
+        for (i = 0; i<row; i++) {
+            x = i;
+            while (x < row && m.getELMT(x, i) == 0) {
+                x++;
+            }
+            if (x == row) {
+                return 0;
+            }
+            if (x != i) {
+                for (j=0; j<row; j++) {
+                    temp = m.getELMT(x, j);
+                    m.setELMT(x, j, m.getELMT(i, j));
+                    m.setELMT(i, j, temp);
+                }
+                det *= -1;
+            }
+            // OBE
+            for (j = i+1; j<row; j++) {
+                num1 = m.getELMT(i, i);
+                num2 = m.getELMT(j, i);
+                for (k=0; k<row; k++) {
+                    num3 = (num1*m.getELMT(j, k)) - (num2*m.getELMT(i, k));
+                    m.setELMT(j, k, num3);
+                }
+                total *= num1;
+            }
         }
-
-        // mengalikan (-1^ctr), banyak pertukaran garis
-        for(i=ctr;i>0;i--){
-            hasil *= -1;
+        // Determinan
+        for (i = 0; i<row;i++) {
+            det *= m.getELMT(i, i);
         }
-        if(hasil == -0.0){
-            result = Math.abs(hasil);
-        }
-        return result;
+        return (det/total);
     }
     public static double detKofaktor(Matrix m){
         int i, j, k, a, b;

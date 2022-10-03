@@ -21,22 +21,6 @@ public class IOFile {
     this.matrix = new double[rows][cols];
 }
 
-  public void bukaFile() {
-    try {
-        File file = new File(this.fileName);
-        this.file = new Scanner(file);
-        while(this.file.hasNextLine()){
-            System.out.println(this.file.nextLine());
-        }
-    } catch (Exception e) {
-      System.out.println("Tidak ada nama File tersebut.");
-    }
-  }
-
-  public void closeFile() {
-    file.close();
-  }
-
   public static int readBaris(String s) {
     int count = 0;
     try{

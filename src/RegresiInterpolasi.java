@@ -51,8 +51,8 @@ public class RegresiInterpolasi {
     }
 
     public static void InterpolasiBikubik(Matrix m, double x, double y){
-        int i, j, k, a, b, idxi, idxj, sumA;
-        double temp;
+        int i, j, k, a, b, idxi, idxj;
+        double temp, sumA;
         Matrix mBikubik = new Matrix (16, 16);
         Matrix mInverse = new Matrix (mBikubik.getRow(), mBikubik.getColumn());
         Matrix mTemp = new Matrix (16, 1);
@@ -87,17 +87,15 @@ public class RegresiInterpolasi {
         mHasil = mTemp.kaliMatrix(mInverse, mTemp);
 
         k=0;
-        temp = mHasil.getELMT(k, 0) ;
         sumA=0;
         for(i=0; i<4; i++){
             for(j=0; j<4; j++){
-                temp = new BigDecimal(temp).setScale(4, RoundingMode.HALF_UP).doubleValue();
-                sumA += temp * Math.pow(x, i) * Math.pow(y, j);
+                sumA += mHasil.getELMT(k, 0) * Math.pow(x, i) * Math.pow(y, j);
                 k++;
             }
         }
-
-        System.out.println("Hasil dari interpolasi bikubik dengan titik x = " + x + " dan titik y = " + y + " adalah " +sumA);
+        sumA = new BigDecimal(sumA).setScale(4, RoundingMode.HALF_UP).doubleValue();
+        System.out.println("Hasil dari interpolasi bikubik dengan titik f(" + x + "," + y + ") = " +sumA);
     }
 
     public static void RegresiLinierGanda(Matrix m, Matrix n){

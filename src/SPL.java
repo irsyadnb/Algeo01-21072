@@ -148,7 +148,7 @@ public class SPL {
         if (solusi == false){
             hasil ="Tidak ada solusi untuk SPL ini.";
         } else{
-            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagEQOne(m))){
+            if((m.getRow()==m.getColumn()-1)&&(Matrix.isDiagonalOne(m))){
                 i=0;
                 a = i+1;
                 hasil = "x" + a + " = " + m.getELMT(i, m.getColumn()-1);
